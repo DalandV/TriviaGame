@@ -35,7 +35,9 @@ $(document).ready(function () {
 
     var indexNum = 0;
 
-    var timeBetweenQuestions = 5;
+    var correctScore = 0;
+    var incorrectScore = 0;
+    var unansweredScore = 0;
 
     // =====================================================================================
 
@@ -111,16 +113,16 @@ $(document).ready(function () {
 
     // DISPLAYS CORRECT ANSWER SCREEN
     function correctAnswerDisplay() {
-
+        correctScore++;
         var correct = $("<p>").text("Correct!")
         $("#game-div").html(correct)
-        console.log(indexNum)
         betweenQuestions()
     };
     // =====================================================================================
 
     // DISPLAYS WRONG ANSWER SCREEN
     function wrongAnswerDisplay() {
+        incorrectScore++;
         var wrong = $("<p>").text("Wrong!")
         $("#game-div").html(wrong)
         correctAnswerWas()
@@ -130,6 +132,7 @@ $(document).ready(function () {
 
     // DISPLAYS TIME UP SCREEN
     function timesUpDisplay() {
+        unansweredScore++
         var timesUp = $("<p>").text("Times Up!")
         $("#game-div").html(timesUp)
         correctAnswerWas()
@@ -138,16 +141,41 @@ $(document).ready(function () {
     };
     // =====================================================================================
 
+    // DISPLAYS END GAME SCREEN
+    function endGameDisplay() {
+        var endGame = $("<p>").text("Game Over! Here's how you did!")
+        $("#game-div").html(endGame)
+
+        var score1 = $("<p>").text("Correct Answers: " + correctScore)
+        $("#game-div").append(score1)
+        var score2 = $("<p>").text("Incorrect Answers: " + incorrectScore)
+        $("#game-div").append(score2)
+        var score3 = $("<p>").text("Unanswered Questions: " + unansweredScore)
+        $("#game-div").append(score3)
+    };
+    // =====================================================================================
+
+    // OTHER FUNCTIONS
     function correctAnswerWas() {
         var answer = $("<p>").text("The correct answer was: " + trivia[indexNum].correctAnswer)
         $("#game-div").append(answer)
     };
 
-    function betweenQuestions(){
-        indexNum++
-        var timerB = setTimeout(function(){
-            nextQuestion()
-        }, 1000 * 5);
+    function betweenQuestions() {
+        indexNum++;
+
+        // goes to the next question as long as there's another questions left
+        if (indexNum < 5) {
+            var timerB = setTimeout(function () {
+                nextQuestion()
+            }, 1000 * 1);
+        }
+        else {
+            endGameDisplay()
+        }
+
     }
+    // =====================================================================================
+
 
 });
