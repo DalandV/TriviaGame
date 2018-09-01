@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    // Create an array of objects that hold the questions and answers
+    // GLOBAL VARIABLES
     var trivia = [
         {
             question: "Which star is at the center of our Solar System?",
@@ -33,69 +33,96 @@ $(document).ready(function () {
         }
     ];
 
-    var whateverIndexImOn = 0;
-
-    var timeRemaining = 5;
+    var indexNum = 0;
 
     var timeBetweenQuestions = 5;
 
-    var timeDisplay = "<p>Time Remaining: " + timeRemaining + " seconds" + "</p>";
-
     var questionDisplay =
 
-        "<p>" + trivia[whateverIndexImOn].question + "</p>" +
-        "<h2>" + trivia[whateverIndexImOn].options[0] + "</h2>" +
-        "<h2>" + trivia[whateverIndexImOn].options[1] + "</h2>" +
-        "<h2>" + trivia[whateverIndexImOn].options[2] + "</h2>" +
-        "<h2>" + trivia[whateverIndexImOn].options[3] + "</h2>";
-
+        "<p>" + trivia[indexNum].question + "</p>" +
+        "<h3>" + trivia[indexNum].options[0] + "</h3>" +
+        "<h3>" + trivia[indexNum].options[1] + "</h3>" +
+        "<h3>" + trivia[indexNum].options[2] + "</h3>" +
+        "<h3>" + trivia[indexNum].options[3] + "</h3>";
 
     var correctAnswerDisplay =
         "<p>Correct!</p>";
 
     var wrongAnswerDisplay =
         "<p>Wrong!</p>" +
-        "<p>The correct answer was: " + trivia[whateverIndexImOn].correctAnswer + "</p>";
+        "<p>The correct answer was: " + trivia[indexNum].correctAnswer + "</p>";
 
     var timesUpDisplay =
         "<p>Time's Up!</p>" +
-        "<p>The correct answer was: " + trivia[whateverIndexImOn].correctAnswer + "</p>";
+        "<p>The correct answer was: " + trivia[indexNum].correctAnswer + "</p>";
 
-    
+    // =====================================================================================
 
-    
 
-    $("#start-button").on("click", function () {
+    // PRESS START TO START THE GAME
 
-        var timer = setInterval(countdown, 1000);
+    $("#start-button").on("click", nextQuestion);
 
-        function countdown() {
-            $("#countdown-space").html("<p>Time Remaining: " + timeRemaining-- + " seconds" + "</p>");
-    
+    // =====================================================================================
+
+    // DISPLAYS QUESTION SCREEN
+    function nextQuestion() {
+
+        // LOCAL VARIABLES
+        var timeRemaining = 30;
+        var timerA = setInterval(function () {
+            timeRemaining--;
+
+            gameDivDisplay()
+
+            // stops the countdown when timer reaches 0
             if (timeRemaining === 0) {
-                clearInterval(timer)
-                $("#game-area").html(timesUpDisplay);
-            }
-            // console.log(timeRemaining)
-        
-        }
+                clearInterval(timerA)
+            };
+        }, 1000);
+        // ====================================
 
-        $("#countdown-space").html(timeDisplay);
+        // create new DOM elements to display timer, question, and options
+        function gameDivDisplay() {
 
-        $("#game-area").html(questionDisplay);
+            // timer
+            var pTime = $("<p>").text("Time Remaining: " + timeRemaining + " seconds")
+            $("#game-div").html(pTime)
+            // question
+            var pQuestion = $("<p id='question'>").text(trivia[indexNum].question)
+            $("#game-div").append(pQuestion)
+            // options
+            var option1 = $("<h3 class='options'>").text(trivia[indexNum].options[0])
+            $("#game-div").append(option1)
+            var option2 = $("<h3 class='options'>").text(trivia[indexNum].options[1])
+            $("#game-div").append(option2)
+            var option3 = $("<h3 class='options'>").text(trivia[indexNum].options[2])
+            $("#game-div").append(option3)
+            var option4 = $("<h3 class='options'>").text(trivia[indexNum].options[3])
+            $("#game-div").append(option4)
+        };
+        gameDivDisplay()
 
-        
+    };
+    // =====================================================================================
 
-        $("h2").on("click", function (event) {
-            if (event.target.innerHTML === trivia[whateverIndexImOn].correctAnswer) {
-                $("#game-area").html(correctAnswerDisplay);
-                console.log("yes")
-            }
-            else {
-                $("#game-area").html(wrongAnswerDisplay);
-            }
-        });
+    // DISPLAYS CORRECT ANSWER SCREEN
+    function correctAnswerScreen() {
 
-    });
+    };
+    // =====================================================================================
+
+    // DISPLAYS WRONG ANSWER SCREEN
+    function wrongAnswerScreen() {
+
+    };
+    // =====================================================================================
+
+    // DISPLAYS TIME UP SCREEN
+    function timesUpScreen() {
+
+    };
+    // =====================================================================================
+
 
 });
