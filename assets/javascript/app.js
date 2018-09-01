@@ -152,6 +152,19 @@ $(document).ready(function () {
         $("#game-div").append(score2)
         var score3 = $("<p>").text("Unanswered Questions: " + unansweredScore)
         $("#game-div").append(score3)
+
+        var restart = $("<h2>").text("Start Over?")
+        $("#game-div").append(restart)
+
+        $(restart).on("click",function(){
+            // Reset variables
+            indexNum = 0;
+            correctScore = 0;
+            incorrectScore = 0;
+            unansweredScore = 0;
+            // Starts game from the beginning
+            nextQuestion()
+        });
     };
     // =====================================================================================
 
