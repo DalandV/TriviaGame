@@ -37,27 +37,7 @@ $(document).ready(function () {
 
     var timeBetweenQuestions = 5;
 
-    var questionDisplay =
-
-        "<p>" + trivia[indexNum].question + "</p>" +
-        "<h3>" + trivia[indexNum].options[0] + "</h3>" +
-        "<h3>" + trivia[indexNum].options[1] + "</h3>" +
-        "<h3>" + trivia[indexNum].options[2] + "</h3>" +
-        "<h3>" + trivia[indexNum].options[3] + "</h3>";
-
-    var correctAnswerDisplay =
-        "<p>Correct!</p>";
-
-    var wrongAnswerDisplay =
-        "<p>Wrong!</p>" +
-        "<p>The correct answer was: " + trivia[indexNum].correctAnswer + "</p>";
-
-    var timesUpDisplay =
-        "<p>Time's Up!</p>" +
-        "<p>The correct answer was: " + trivia[indexNum].correctAnswer + "</p>";
-
     // =====================================================================================
-
 
     // PRESS START TO START THE GAME
 
@@ -70,27 +50,38 @@ $(document).ready(function () {
 
         // LOCAL VARIABLES
         var timeRemaining = 30;
+        var optionChosen = false;
         var timerA = setInterval(function () {
             timeRemaining--;
 
-            gameDivDisplay()
+            // updates timeRemaing
+            $("#timer").text("Time Remaining: " + timeRemaining + " seconds")
 
-            // stops the countdown when timer reaches 0
+            // stops the countdown when timer reaches 0 or user chooses an option
             if (timeRemaining === 0) {
                 clearInterval(timerA)
-            };
+                timesUpDisplay()
+            }
+            else if (optionChosen === true) {
+                clearInterval(timerA)
+            }
         }, 1000);
         // ====================================
 
-        // create new DOM elements to display timer, question, and options
+        // create new DOM element to display the timer
+        function timeDivDisplay() {
+            // timer
+            var pTime = $("<p id='timer'>").text("Time Remaining: " + timeRemaining + " seconds")
+            $("#time-div").html(pTime)
+        };
+        timeDivDisplay()
+
+        // create new DOM elements to display the question and options
         function gameDivDisplay() {
 
-            // timer
-            var pTime = $("<p>").text("Time Remaining: " + timeRemaining + " seconds")
-            $("#game-div").html(pTime)
             // question
             var pQuestion = $("<p id='question'>").text(trivia[indexNum].question)
-            $("#game-div").append(pQuestion)
+            $("#game-div").html(pQuestion)
             // options
             var option1 = $("<h3 class='options'>").text(trivia[indexNum].options[0])
             $("#game-div").append(option1)
@@ -103,26 +94,60 @@ $(document).ready(function () {
         };
         gameDivDisplay()
 
+        // what to do when the user chooses an option
+        $(".options").on("click", function () {
+            optionChosen = true
+
+            if (event.target.innerHTML === trivia[indexNum].correctAnswer) {
+                correctAnswerDisplay()
+            }
+            else {
+                wrongAnswerDisplay()
+            };
+        });
+
     };
     // =====================================================================================
 
     // DISPLAYS CORRECT ANSWER SCREEN
-    function correctAnswerScreen() {
+    function correctAnswerDisplay() {
 
+        var correct = $("<p>").text("Correct!")
+        $("#game-div").html(correct)
+        console.log(indexNum)
+        betweenQuestions()
     };
     // =====================================================================================
 
     // DISPLAYS WRONG ANSWER SCREEN
-    function wrongAnswerScreen() {
-
+    function wrongAnswerDisplay() {
+        var wrong = $("<p>").text("Wrong!")
+        $("#game-div").html(wrong)
+        correctAnswerWas()
+        betweenQuestions()
     };
     // =====================================================================================
 
     // DISPLAYS TIME UP SCREEN
-    function timesUpScreen() {
+    function timesUpDisplay() {
+        var timesUp = $("<p>").text("Times Up!")
+        $("#game-div").html(timesUp)
+        correctAnswerWas()
+        betweenQuestions()
 
     };
     // =====================================================================================
 
+    function correctAnswerWas() {
+        var answer = $("<p>").text("The correct answer was: " + trivia[indexNum].correctAnswer)
+        $("#game-div").append(answer)
+    };
+
+    function betweenQuestions(){
+        indexNum++
+        var timerB = setTimeout(function(){
+            nextQuestion()
+        }, 1000 * 5);
+    }
 
 });
