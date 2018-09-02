@@ -10,7 +10,7 @@ $(document).ready(function () {
 
         {
             question: "How long does it take light from the sun to reach earth?",
-            options: ["8 minutes", "24 hours", "365 days", "35 minutes"],
+            options: ["8 minutes and 20 seconds", "24 hours", "365 days", "35 minutes"],
             correctAnswer: "8 minutes and 20 seconds"
         },
 
