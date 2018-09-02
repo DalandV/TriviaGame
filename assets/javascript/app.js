@@ -183,12 +183,12 @@ $(document).ready(function () {
         if (indexNum < 5) {
             var timerB = setTimeout(function () {
                 nextQuestion()
-            }, 1000 * 1);
+            }, 1000 * 3);
         }
         else {
             timerB = setTimeout(function(){
                 endGameDisplay()
-            }, 1000 * 1);
+            }, 1000 * 3);
             
         }
 
