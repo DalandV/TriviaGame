@@ -29,6 +29,45 @@ ul{
     padding: 10px 10px;
     border: 2px solid black;
 }
+#timer{
+    font-size: 6vw;
+}
+#question{
+    font-size: 5vw;
+}
+.options{
+    font-size: 7vw;
+}
+.p-between{
+    font-size: 5vw;
+}
+.p-end{
+    font-size: 5vw;
+}
+@media (min-width: 576px) {
+    #title{
+        font-size: 7vw;
+    }
+    #start-button{
+        font-size: 4vw;
+    }
+    #timer{
+        font-size: 5vw;
+    }
+    #question{
+        font-size: 4vw;
+    }
+    .options{
+        font-size: 6vw;
+    }
+    .p-between{
+        font-size: 4vw;
+    }
+    .p-end{
+        font-size: 4vw;
+    }
+
+}
 @media only screen and (min-width: 768px) {
     #title{
         font-size: 7vw;
