@@ -1,0 +1,54 @@
+body{
+    background-image: url(../images/planets.jpg);
+}
+#display-div{
+    background: lightblue;
+    position: fixed;
+    top: 5%;
+    bottom: 5%;
+    overflow: auto;
+}
+#start-button{
+    margin-top: 150px;
+    display: inline-block;
+    background: lightgray;
+    padding: 10px 50px;
+    border: 2px solid black;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+/* .options{
+    float: left;
+    clear: both;
+    margin: auto;
+} */
+.options:hover{
+    background: lightgray;
+    padding: 10px 10px;
+    border: 2px solid black;
+}
+@media only screen and (min-width: 768px) {
+    #title{
+        font-size: 7vw;
+    }
+    #start-button{
+        font-size: 4vw;
+    }
+    #timer{
+        font-size: 2vw;
+    }
+    #question{
+        font-size: 2vw;
+    }
+    .options{
+        font-size: 3.5vw;
+    }
+    .p-between{
+        font-size: 2vw;
+    }
+    .p-end{
+        font-size: 2vw;
+    }
+} 

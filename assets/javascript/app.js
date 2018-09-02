@@ -85,14 +85,16 @@ $(document).ready(function () {
             var pQuestion = $("<p id='question'>").text(trivia[indexNum].question)
             $("#game-div").html(pQuestion)
             // options
-            var option1 = $("<h3 class='options'>").text(trivia[indexNum].options[0])
-            $("#game-div").append(option1)
-            var option2 = $("<h3 class='options'>").text(trivia[indexNum].options[1])
-            $("#game-div").append(option2)
-            var option3 = $("<h3 class='options'>").text(trivia[indexNum].options[2])
-            $("#game-div").append(option3)
-            var option4 = $("<h3 class='options'>").text(trivia[indexNum].options[3])
-            $("#game-div").append(option4)
+            var optionUL = $("<ul>")
+            $("#game-div").append(optionUL)
+            var option1 = $("<li class='options mt-3'>").text(trivia[indexNum].options[0])
+            $(optionUL).append(option1)
+            var option2 = $("<li class='options'>").text(trivia[indexNum].options[1])
+            $(optionUL).append(option2)
+            var option3 = $("<li class='options'>").text(trivia[indexNum].options[2])
+            $(optionUL).append(option3)
+            var option4 = $("<li class='options mb-4'>").text(trivia[indexNum].options[3])
+            $(optionUL).append(option4)
         };
         gameDivDisplay()
 
@@ -114,7 +116,7 @@ $(document).ready(function () {
     // DISPLAYS CORRECT ANSWER SCREEN
     function correctAnswerDisplay() {
         correctScore++;
-        var correct = $("<p>").text("Correct!")
+        var correct = $("<p class='p-between'>").text("Correct!")
         $("#game-div").html(correct)
         betweenQuestions()
     };
@@ -123,7 +125,7 @@ $(document).ready(function () {
     // DISPLAYS WRONG ANSWER SCREEN
     function wrongAnswerDisplay() {
         incorrectScore++;
-        var wrong = $("<p>").text("Wrong!")
+        var wrong = $("<p class='p-between'>").text("Wrong!")
         $("#game-div").html(wrong)
         correctAnswerWas()
         betweenQuestions()
@@ -133,7 +135,7 @@ $(document).ready(function () {
     // DISPLAYS TIME UP SCREEN
     function timesUpDisplay() {
         unansweredScore++
-        var timesUp = $("<p>").text("Times Up!")
+        var timesUp = $("<p class='p-between'>").text("Times Up!")
         $("#game-div").html(timesUp)
         correctAnswerWas()
         betweenQuestions()
@@ -143,14 +145,14 @@ $(document).ready(function () {
 
     // DISPLAYS END GAME SCREEN
     function endGameDisplay() {
-        var endGame = $("<p>").text("Game Over! Here's how you did!")
+        var endGame = $("<p class='p-end'>").text("Game Over! Here's how you did!")
         $("#game-div").html(endGame)
 
-        var score1 = $("<p>").text("Correct Answers: " + correctScore)
+        var score1 = $("<p class='p-end'>").text("Correct Answers: " + correctScore)
         $("#game-div").append(score1)
-        var score2 = $("<p>").text("Incorrect Answers: " + incorrectScore)
+        var score2 = $("<p class='p-end'>").text("Incorrect Answers: " + incorrectScore)
         $("#game-div").append(score2)
-        var score3 = $("<p>").text("Unanswered Questions: " + unansweredScore)
+        var score3 = $("<p class='p-end'>").text("Unanswered Questions: " + unansweredScore)
         $("#game-div").append(score3)
 
         var restart = $("<h2>").text("Start Over?")
@@ -170,7 +172,7 @@ $(document).ready(function () {
 
     // OTHER FUNCTIONS
     function correctAnswerWas() {
-        var answer = $("<p>").text("The correct answer was: " + trivia[indexNum].correctAnswer)
+        var answer = $("<p class='p-between'>").text("The correct answer was: " + trivia[indexNum].correctAnswer)
         $("#game-div").append(answer)
     };
 
@@ -184,7 +186,10 @@ $(document).ready(function () {
             }, 1000 * 1);
         }
         else {
-            endGameDisplay()
+            timerB = setTimeout(function(){
+                endGameDisplay()
+            }, 1000 * 1);
+            
         }
 
     }
