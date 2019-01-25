@@ -81,7 +81,7 @@ $(document).ready(function() {
     function timeDivDisplay() {
       // timer
       const pTime = $("<p id='timer'>").text(
-        "Time Remaining: " + timeRemaining + " seconds"
+        `Time Remaining: ${timeRemaining} seconds`
       );
       $("#time-div").html(pTime);
     }
@@ -164,15 +164,15 @@ $(document).ready(function() {
     $("#game-div").html(endGame);
 
     const score1 = $("<p class='p-end'>").text(
-      "Correct Answers: " + correctScore
+      `Correct Answers: ${correctScore}`
     );
     $("#game-div").append(score1);
     const score2 = $("<p class='p-end'>").text(
-      "Incorrect Answers: " + incorrectScore
+      `Incorrect Answers: ${incorrectScore}`
     );
     $("#game-div").append(score2);
     const score3 = $("<p class='p-end'>").text(
-      "Unanswered Questions: " + unansweredScore
+      `Unanswered Questions: ${unansweredScore}`
     );
     $("#game-div").append(score3);
 
@@ -194,7 +194,7 @@ $(document).ready(function() {
   // OTHER FUNCTIONS
   function correctAnswerWas() {
     const answer = $("<p class='p-between'>").text(
-      "The correct answer was: " + trivia[indexNum].correctAnswer
+      `The correct answer was: ${trivia[indexNum].correctAnswer}`
     );
     $("#game-div").append(answer);
   }
